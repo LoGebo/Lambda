@@ -146,6 +146,7 @@ $('a.nav-link').on('click', function (event) {
 $(document).ready(updateHoriSelector); // Call on page load
 $(window).on('resize', updateHoriSelector); // Call on window resize
 
+
   
  
   /*
