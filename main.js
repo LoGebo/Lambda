@@ -1,17 +1,17 @@
 function test() {
-    var tabsNewAnim = $('#navbarSupportedContent');
-    var selectorNewAnim = $('#navbarSupportedContent').find('li').length;
-    var activeItemNewAnim = tabsNewAnim.find('.active');
-    var activeWidthNewAnimHeight = activeItemNewAnim.innerHeight();
-    var activeWidthNewAnimWidth = activeItemNewAnim.innerWidth();
-    var itemPosNewAnimTop = activeItemNewAnim.position();
-    var itemPosNewAnimLeft = activeItemNewAnim.position();
-    $(".hori-selector").css({
-      "top": itemPosNewAnimTop.top + "px",
-      "left": itemPosNewAnimLeft.left + "px",
-      "height": activeWidthNewAnimHeight + "px",
-      "width": activeWidthNewAnimWidth + "px"
-    });
+  var tabsNewAnim = $('#navbarSupportedContent');
+  var selectorNewAnim = $('#navbarSupportedContent').find('li').length;
+  var activeItemNewAnim = tabsNewAnim.find('.active');
+  var activeWidthNewAnimHeight = activeItemNewAnim.innerHeight();
+  var activeWidthNewAnimWidth = activeItemNewAnim.innerWidth();
+  var itemPosNewAnimTop = activeItemNewAnim.position();
+  var itemPosNewAnimLeft = activeItemNewAnim.position();
+  $(".hori-selector").css({
+    "top": itemPosNewAnimTop.top + "px",
+    "left": itemPosNewAnimLeft.left + "px",
+    "height": activeWidthNewAnimHeight + "px",
+    "width": activeWidthNewAnimWidth + "px"
+  });
     $("#navbarSupportedContent").on("click", "li", function (e) {
       $('#navbarSupportedContent ul li').removeClass("active");
       $(this).addClass('active');
@@ -27,12 +27,24 @@ function test() {
       });
     });
   }
+
+  var hasRun = false;
   
-  $(document).ready(function () {
-    setTimeout(function () {
-      test();
-    });
-  });
+  $(window).on('load', function() {
+    // Temporarily disable transitions
+    $('.hori-selector').css('transition', 'none');
+
+    if (!hasRun) {
+        test();
+        hasRun = true;
+    }
+
+    // Re-enable transitions after the initial positioning has been set
+    setTimeout(function() {
+        $('.hori-selector').css('transition', '');
+    }, 0);
+});
+
   
   // Smooth scrolling animation
   $('a.nav-link').on('click', function (event) {
@@ -116,12 +128,16 @@ $('a.nav-link').on('click', function (event) {
 });
 
 
-  
-  $(window).on('resize', function () {
-    setTimeout(function () {
+$(window).on('resize', function () {
+  // Call updateHoriSelector before test
+  updateHoriSelector();
+
+  setTimeout(function () {
       test();
-    }, 500);
-  });
+  }, 500);
+});
+
+
   
   $(".navbar-toggler").click(function () {
     $(".navbar-collapse").slideToggle(300);
@@ -134,14 +150,23 @@ $('a.nav-link').on('click', function (event) {
     var windowWidth = $(window).width();
     var horiSelector = $('.hori-selector');
 
-    if (windowWidth <= 768) {
+    // Temporarily disable transitions
+    horiSelector.css('transition', 'none');
+
+    if (windowWidth <= 990) {
       horiSelector.find('.right, .left').css('background-color', '#0f3040');
       horiSelector.attr('style', 'border-bottom-left-radius: 15px !important; border-bottom-right-radius: 15px !important;');
     } else {
       horiSelector.find('.right, .left').css('background-color', '#f5f5f5');
       horiSelector.attr('style', 'border-bottom-left-radius: 0; border-bottom-right-radius: 0;');
     }
+
+    // Re-enable transitions after the new positioning has been set
+    setTimeout(function() {
+        horiSelector.css('transition', '');
+    }, 0);
 }
+
 
 $(document).ready(updateHoriSelector); // Call on page load
 $(window).on('resize', updateHoriSelector); // Call on window resize
@@ -165,3 +190,36 @@ $(window).on('resize', updateHoriSelector); // Call on window resize
         target.parent().addClass('active');
       });
     */
+
+      const degStep = 20;  // control the spread of the fan
+
+      let cards = document.querySelectorAll('.card');
+      
+      function updateCardTransforms() {
+        cards.forEach((card, index) => {
+          const rotateAngle = (index - cards.length / 2) * degStep;
+          card.style.transform = `rotateY(${rotateAngle}deg) translateZ(-300px)`;
+        });
+      }
+      
+      // Initial transform update
+      updateCardTransforms();
+      
+      // Add click event listener to each card
+      cards.forEach((card, index) => {
+        card.addEventListener('click', () => {
+          // Update NodeList and transforms
+          cards = document.querySelectorAll('.card');
+          updateCardTransforms();
+          // Move clicked card to the front
+          card.style.transform = 'rotateY(0deg) translateZ(0px)';
+        });
+      });
+      
+
+
+
+
+    
+
+
