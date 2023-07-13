@@ -591,3 +591,55 @@ input[type="text"]:focus {
     }
 }
 
+.blueDiv {
+    background-color: #0f3040;
+    color: white;
+    padding: 20px;
+    line-height: 200%;
+    margin-top: 100px;
+}
+  
+.greyDiv {
+background-color: #333;
+color: white;
+padding: 20px;
+line-height: 200%;
+margin-top: 100px;
+}
+
+.iconAndTitle {
+display: flex;
+align-items: center;
+padding-left: 20px;
+}
+
+.iconAndTitle i {
+margin-right: 10px;
+margin-bottom: 20px;
+}
+
+.iconAndTitle h2 {
+color: white;
+}
+
+.blueDiv p, .greenDiv p {
+padding-left: 20px;
+padding-right: 20px;
+padding-bottom: 130px;
+}
+
+@media (max-width: 576px) {
+.blueDiv, .greenDiv {
+    padding: 10px;
+}
+
+.iconAndTitle {
+    padding-left: 10px;
+}
+
+.blueDiv p, .greenDiv p {
+    padding-left: 10px;
+    padding-right: 20px;
+    padding-bottom: 130px;
+}
+}
