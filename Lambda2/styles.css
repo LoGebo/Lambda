@@ -1,0 +1,21 @@
+    /* Customized Navbar */
+    .navbar {
+      background-color: #1f1f1f;
+      /* Dark gray, similar to GitHub */
+      height: 70px;
+    }
+
+    .navbar-item {
+      font-size: 0.9rem;
+      font-weight: 300;
+    }
+
+    .logo {
+      height: 40px;
+    }
+
+    /* Dark mode background for the whole page */
+    body {
+      background-color: #121212 !important;
+      color: #ffffff;
+    }
